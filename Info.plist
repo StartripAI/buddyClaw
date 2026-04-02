@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleDisplayName</key>
+    <string>DesktopBuddy</string>
+    <key>CFBundleExecutable</key>
+    <string>BuddyClaw</string>
+    <key>CFBundleIdentifier</key>
+    <string>com.openai.desktopbuddy</string>
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+    <key>CFBundleName</key>
+    <string>BuddyClaw</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>CFBundleShortVersionString</key>
+    <string>0.1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+
+    <key>LSUIElement</key>
+    <true/>
+
+    <key>NSAppleEventsUsageDescription</key>
+    <string>BuddyClaw 仅在你启用相关功能时读取必要的应用状态信息，例如前台应用与开发工作流提示。</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>BuddyClaw 未来版本可选支持语音交互；当前版本不会在未授权时访问麦克风。</string>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
+
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+</dict>
+</plist>

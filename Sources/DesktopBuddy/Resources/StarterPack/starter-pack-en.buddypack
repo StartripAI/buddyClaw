@@ -1,0 +1,22 @@
+{
+  "packID": "starter-pack-en",
+  "version": "1.0.0",
+  "title": "Starter Pack",
+  "items": [
+    {
+      "title": "How BuddyClaw Works",
+      "body": "BuddyClaw keeps imported files, manual notes, and local event memories in one local library. When you double-click the pet and the library already has content, it opens the Ask tab first.",
+      "tags": ["starter", "guide"]
+    },
+    {
+      "title": "Questions You Can Ask",
+      "body": "Try asking: what happened today, what was imported recently, where a keyword appears, whether a build failed recently, or how long you stayed focused.",
+      "tags": ["starter", "ask"]
+    },
+    {
+      "title": "Local-First Rule",
+      "body": "This version of BuddyClaw only does offline extractive answers. It does not go online and it does not pretend to be a cloud model. Answers only come from your local library and timeline memory.",
+      "tags": ["starter", "privacy"]
+    }
+  ]
+}

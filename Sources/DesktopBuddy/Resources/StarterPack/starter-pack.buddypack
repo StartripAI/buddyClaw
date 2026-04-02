@@ -1,0 +1,22 @@
+{
+  "packID": "buddyclaw-starter-pack",
+  "version": "1.0.0",
+  "title": "Starter Pack",
+  "items": [
+    {
+      "title": "BuddyClaw 使用方式",
+      "body": "BuddyClaw 会把你导入的资料、手动笔记和本地事件记忆放进同一个本地资料库里。双击宠物时，如果资料库里已经有内容，它会优先打开“问问我”页签。",
+      "tags": ["guide", "starter"]
+    },
+    {
+      "title": "可以问我的问题",
+      "body": "你可以问：今天做了什么、最近导入了什么、某个关键词在哪些资料里出现过、最近有没有构建失败、连续专注过多久。",
+      "tags": ["faq", "starter"]
+    },
+    {
+      "title": "本地优先原则",
+      "body": "这一版 BuddyClaw 只做离线抽取式问答，不会联网，也不会伪装成云端模型。回答只来自本地资料库和时间线记忆。",
+      "tags": ["privacy", "starter"]
+    }
+  ]
+}
