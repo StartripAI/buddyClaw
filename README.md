@@ -1,6 +1,6 @@
 # BuddyClaw
 
-![BuddyClaw hero](./docs/assets/hero.png)
+![BuddyClaw hero](./docs/assets/promo/promo-01-hero-wide.png)
 
 BuddyClaw is a local-first macOS desktop pet that lives in your menu bar, walks on your desktop, remembers what matters on-device, and stays playful instead of pretending to be a cloud chatbot.
 
@@ -38,7 +38,13 @@ Local-first bilingual macOS desktop pet with Pixel, ASCII, and Claw styles, menu
 
 ## At A Glance
 
-![BuddyClaw showcase](./docs/assets/showcase.png)
+![BuddyClaw styles](./docs/assets/promo/promo-02-styles.png)
+
+![BuddyClaw memory](./docs/assets/promo/promo-03-memory.png)
+
+![BuddyClaw controls](./docs/assets/promo/promo-04-menu-controls.png)
+
+![BuddyClaw download](./docs/assets/promo/promo-05-download.png)
 
 ## Feature Highlights
 
