@@ -21,6 +21,7 @@ let package = Package(
                 "Resources/Sounds",
                 "Resources/RuntimeSprites",
                 "Resources/Spritesheets",
+                "Resources/process_claw.py",
             ],
             resources: [
                 .copy("Resources/PixelSprites"),
