@@ -1,9 +1,9 @@
 import AppKit
 import Foundation
 
-@main
-enum DesktopBuddyApp {
-    static func main() {
+public enum DesktopBuddyApplication {
+    @MainActor
+    public static func run() {
         let application = NSApplication.shared
         let delegate = DesktopBuddyApplicationDelegate()
         application.delegate = delegate

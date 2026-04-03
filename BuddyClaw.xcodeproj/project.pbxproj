@@ -1,0 +1,656 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1255963C1FF346DCB4BD14EB /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D0B913A4DDB523036F62BE /* Cocoa.framework */; };
+		17DFC6A6FE9F4287CE520B1D /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D0B913A4DDB523036F62BE /* Cocoa.framework */; };
+		180F6C8F3FEDC6EE964A6C2F /* BuddyClawCLIEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8190507272975DE31CF283 /* BuddyClawCLIEntry.swift */; };
+		2BB501FA514393ECADF2594E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26847A3D5BD2CCB1E944CA88 /* Assets.xcassets */; };
+		366152BE9D4326451A7277F3 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 88F7F3AB935E7182EE1DCC10 /* PrivacyInfo.xcprivacy */; };
+		401EA474FE2D5C7AF1567E64 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 88F7F3AB935E7182EE1DCC10 /* PrivacyInfo.xcprivacy */; };
+		526E2B6F93E81C62D65EAF93 /* DesktopBuddy in Frameworks */ = {isa = PBXBuildFile; productRef = 29130DC102C990C16AEFA5BE /* DesktopBuddy */; };
+		68938F31BB0F95FE48A5EEB4 /* DesktopBuddy in Frameworks */ = {isa = PBXBuildFile; productRef = 5FB30672F3E175CC2C6DACEA /* DesktopBuddy */; };
+		80B3D8E20F63321813394FB8 /* DesktopBuddy in Frameworks */ = {isa = PBXBuildFile; productRef = 3F861BC179D3553565826C59 /* DesktopBuddy */; };
+		8B588322214448EB5364B320 /* VerifiedSpriteCatalogTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01119F2613FBFECAF9628C3E /* VerifiedSpriteCatalogTests.swift */; };
+		912742EDAF67C98D5FFCAC76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26847A3D5BD2CCB1E944CA88 /* Assets.xcassets */; };
+		97725F786BA9B377F44A2986 /* VaultStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A90661B2D20DCA824D654584 /* VaultStoreTests.swift */; };
+		9B9D4036693C626F5F0817FB /* CompanionGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 554998334E562271C7433F19 /* CompanionGeneratorTests.swift */; };
+		9CC8D269BE797D26EDA9FDF6 /* CompanionIdentityServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A39B04B30169C1D1894961 /* CompanionIdentityServiceTests.swift */; };
+		A3ADCAA14A8B699A1E10326D /* DesktopBuddySettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE14423CEE043A0CC8B3DD /* DesktopBuddySettingsTests.swift */; };
+		AFDCC04435ADFFB0F9805A8F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2D0B913A4DDB523036F62BE /* Cocoa.framework */; };
+		C45628F0A20F7508F4AC8C2E /* BuddyClawCLIEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8190507272975DE31CF283 /* BuddyClawCLIEntry.swift */; };
+		E17FCA47B3CD413366E6E8D9 /* WorkStateObserverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AC68F1E1652B5A1F7E15BC8 /* WorkStateObserverTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		01119F2613FBFECAF9628C3E /* VerifiedSpriteCatalogTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VerifiedSpriteCatalogTests.swift; path = Tests/DesktopBuddyTests/VerifiedSpriteCatalogTests.swift; sourceTree = "<group>"; };
+		0BDF04AF1F556EFE549B63C6 /* BuddyClaw-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "BuddyClaw-Info.plist"; path = "Support/BuddyClaw-Info.plist"; sourceTree = "<group>"; };
+		26847A3D5BD2CCB1E944CA88 /* Assets.xcassets */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Support/Assets.xcassets; sourceTree = "<group>"; };
+		31A39B04B30169C1D1894961 /* CompanionIdentityServiceTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompanionIdentityServiceTests.swift; path = Tests/DesktopBuddyTests/CompanionIdentityServiceTests.swift; sourceTree = "<group>"; };
+		398BD63D5DCD0EE39085BD4E /* BuddyClawAppStore.entitlements */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.entitlements; name = BuddyClawAppStore.entitlements; path = Support/BuddyClawAppStore.entitlements; sourceTree = "<group>"; };
+		3FB942966ECE781A1A619D94 /* BuddyClawDirect.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = BuddyClawDirect.xcconfig; path = Config/BuddyClawDirect.xcconfig; sourceTree = "<group>"; };
+		554998334E562271C7433F19 /* CompanionGeneratorTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CompanionGeneratorTests.swift; path = Tests/DesktopBuddyTests/CompanionGeneratorTests.swift; sourceTree = "<group>"; };
+		63CB5DAF325145DC291F3C9F /* BuddyClawAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuddyClawAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AC68F1E1652B5A1F7E15BC8 /* WorkStateObserverTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WorkStateObserverTests.swift; path = Tests/DesktopBuddyTests/WorkStateObserverTests.swift; sourceTree = "<group>"; };
+		721367EDD55B00D1CD825005 /* BuddyClawAppStore.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = BuddyClawAppStore.xcconfig; path = Config/BuddyClawAppStore.xcconfig; sourceTree = "<group>"; };
+		88F7F3AB935E7182EE1DCC10 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = Support/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		91BE14423CEE043A0CC8B3DD /* DesktopBuddySettingsTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DesktopBuddySettingsTests.swift; path = Tests/DesktopBuddyTests/DesktopBuddySettingsTests.swift; sourceTree = "<group>"; };
+		A4B62F71A072C5497D6E3C01 /* BuddyClawDirect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BuddyClawDirect.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8A18ADF62EF475997966DD8 /* release_buddyclaw.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = release_buddyclaw.sh; path = scripts/release_buddyclaw.sh; sourceTree = "<group>"; };
+		A90661B2D20DCA824D654584 /* VaultStoreTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = VaultStoreTests.swift; path = Tests/DesktopBuddyTests/VaultStoreTests.swift; sourceTree = "<group>"; };
+		AA045655B47CE1C2CC7463B5 /* DesktopBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DesktopBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD5F5C9CD84962B81BAD8379 /* Common.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Common.xcconfig; path = Config/Common.xcconfig; sourceTree = "<group>"; };
+		BE4FC98D9FFE8133853BE20A /* Package.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
+		C2D0B913A4DDB523036F62BE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		DB8190507272975DE31CF283 /* BuddyClawCLIEntry.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BuddyClawCLIEntry.swift; path = Sources/BuddyClawCLI/BuddyClawCLIEntry.swift; sourceTree = "<group>"; };
+		E4DA36E42243E944A3B5BBF4 /* archive_app_store.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; name = archive_app_store.sh; path = scripts/archive_app_store.sh; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7104A1A54AE543FF6D7EE630 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1255963C1FF346DCB4BD14EB /* Cocoa.framework in Frameworks */,
+				80B3D8E20F63321813394FB8 /* DesktopBuddy in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7AC7B0C123F7784420D4AA94 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				17DFC6A6FE9F4287CE520B1D /* Cocoa.framework in Frameworks */,
+				68938F31BB0F95FE48A5EEB4 /* DesktopBuddy in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C611EE0072382D7DD314455C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AFDCC04435ADFFB0F9805A8F /* Cocoa.framework in Frameworks */,
+				526E2B6F93E81C62D65EAF93 /* DesktopBuddy in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B89A23A8F5E933984A953FA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				C0B9D94506A594B1E1360A0D /* BuddyClawCLI */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		302C6E431DA46687CA3F59F5 /* scripts */ = {
+			isa = PBXGroup;
+			children = (
+				E4DA36E42243E944A3B5BBF4 /* archive_app_store.sh */,
+				A8A18ADF62EF475997966DD8 /* release_buddyclaw.sh */,
+			);
+			name = scripts;
+			sourceTree = "<group>";
+		};
+		3DDC64554D09622304F74800 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				63CB5DAF325145DC291F3C9F /* BuddyClawAppStore.app */,
+				A4B62F71A072C5497D6E3C01 /* BuddyClawDirect.app */,
+				AA045655B47CE1C2CC7463B5 /* DesktopBuddyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		444852683BF6410CEBCCC8E8 = {
+			isa = PBXGroup;
+			children = (
+				9481DA17353063EC3D3AC2DE /* Config */,
+				AE618F3961496B6BBB5593F2 /* Frameworks */,
+				BE4FC98D9FFE8133853BE20A /* Package.swift */,
+				3DDC64554D09622304F74800 /* Products */,
+				302C6E431DA46687CA3F59F5 /* scripts */,
+				1B89A23A8F5E933984A953FA /* Sources */,
+				F538D27D3AF9F68F7AA9606F /* Support */,
+				96520F8E33B0E6B9D9F9515D /* Tests */,
+			);
+			sourceTree = "<group>";
+		};
+		93CBE3E1D49EAC1A3F2AB19D /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				C2D0B913A4DDB523036F62BE /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		9481DA17353063EC3D3AC2DE /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				721367EDD55B00D1CD825005 /* BuddyClawAppStore.xcconfig */,
+				3FB942966ECE781A1A619D94 /* BuddyClawDirect.xcconfig */,
+				BD5F5C9CD84962B81BAD8379 /* Common.xcconfig */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		96520F8E33B0E6B9D9F9515D /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				E4F7436408F60CD776053A92 /* DesktopBuddyTests */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		AE618F3961496B6BBB5593F2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				93CBE3E1D49EAC1A3F2AB19D /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C0B9D94506A594B1E1360A0D /* BuddyClawCLI */ = {
+			isa = PBXGroup;
+			children = (
+				DB8190507272975DE31CF283 /* BuddyClawCLIEntry.swift */,
+			);
+			name = BuddyClawCLI;
+			sourceTree = "<group>";
+		};
+		E4F7436408F60CD776053A92 /* DesktopBuddyTests */ = {
+			isa = PBXGroup;
+			children = (
+				554998334E562271C7433F19 /* CompanionGeneratorTests.swift */,
+				31A39B04B30169C1D1894961 /* CompanionIdentityServiceTests.swift */,
+				91BE14423CEE043A0CC8B3DD /* DesktopBuddySettingsTests.swift */,
+				A90661B2D20DCA824D654584 /* VaultStoreTests.swift */,
+				01119F2613FBFECAF9628C3E /* VerifiedSpriteCatalogTests.swift */,
+				6AC68F1E1652B5A1F7E15BC8 /* WorkStateObserverTests.swift */,
+			);
+			name = DesktopBuddyTests;
+			sourceTree = "<group>";
+		};
+		F538D27D3AF9F68F7AA9606F /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				26847A3D5BD2CCB1E944CA88 /* Assets.xcassets */,
+				0BDF04AF1F556EFE549B63C6 /* BuddyClaw-Info.plist */,
+				398BD63D5DCD0EE39085BD4E /* BuddyClawAppStore.entitlements */,
+				88F7F3AB935E7182EE1DCC10 /* PrivacyInfo.xcprivacy */,
+			);
+			name = Support;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0CAA30174094BBE05783B2B5 /* DesktopBuddyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 60FE7C5E924B0CDE9F4CA538 /* Build configuration list for PBXNativeTarget "DesktopBuddyTests" */;
+			buildPhases = (
+				835D7E921F361BC580C2413C /* Sources */,
+				7AC7B0C123F7784420D4AA94 /* Frameworks */,
+				74A4D3F4BF358DB4ED25F1B0 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DesktopBuddyTests;
+			packageProductDependencies = (
+				5FB30672F3E175CC2C6DACEA /* DesktopBuddy */,
+			);
+			productName = DesktopBuddyTests;
+			productReference = AA045655B47CE1C2CC7463B5 /* DesktopBuddyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		613C6AF9E01F5E13184E6B27 /* BuddyClawAppStore */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 605F3FFE51887C910DB91AC3 /* Build configuration list for PBXNativeTarget "BuddyClawAppStore" */;
+			buildPhases = (
+				5AFD964D32B10704E99FA3A5 /* Sources */,
+				7104A1A54AE543FF6D7EE630 /* Frameworks */,
+				532C2BA80E4D77CADFC796D8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BuddyClawAppStore;
+			packageProductDependencies = (
+				3F861BC179D3553565826C59 /* DesktopBuddy */,
+			);
+			productName = BuddyClawAppStore;
+			productReference = 63CB5DAF325145DC291F3C9F /* BuddyClawAppStore.app */;
+			productType = "com.apple.product-type.application";
+		};
+		67A5E9C0BEB572203E5E1008 /* BuddyClawDirect */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 127C56624E68154E1DCB6791 /* Build configuration list for PBXNativeTarget "BuddyClawDirect" */;
+			buildPhases = (
+				D0816E1D3B5711009D46772D /* Sources */,
+				C611EE0072382D7DD314455C /* Frameworks */,
+				895FC1AF4807A8F4259F2C6B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BuddyClawDirect;
+			packageProductDependencies = (
+				29130DC102C990C16AEFA5BE /* DesktopBuddy */,
+			);
+			productName = BuddyClawDirect;
+			productReference = A4B62F71A072C5497D6E3C01 /* BuddyClawDirect.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A51C1DECB0FC9945132B584 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 2640;
+				TargetAttributes = {
+					0CAA30174094BBE05783B2B5 = {
+						CreatedOnToolsVersion = 26.4;
+					};
+					613C6AF9E01F5E13184E6B27 = {
+						CreatedOnToolsVersion = 26.4;
+					};
+					67A5E9C0BEB572203E5E1008 = {
+						CreatedOnToolsVersion = 26.4;
+					};
+				};
+			};
+			buildConfigurationList = B90D05394D4D12FF096F3625 /* Build configuration list for PBXProject "BuddyClaw" */;
+			compatibilityVersion = "Xcode 15.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 444852683BF6410CEBCCC8E8;
+			minimizedProjectReferenceProxies = 0;
+			packageReferences = (
+				CBB5E8DCD126F16B43C7E3E5 /* XCLocalSwiftPackageReference "." */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 3DDC64554D09622304F74800 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				613C6AF9E01F5E13184E6B27 /* BuddyClawAppStore */,
+				67A5E9C0BEB572203E5E1008 /* BuddyClawDirect */,
+				0CAA30174094BBE05783B2B5 /* DesktopBuddyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		532C2BA80E4D77CADFC796D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BB501FA514393ECADF2594E /* Assets.xcassets in Resources */,
+				366152BE9D4326451A7277F3 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74A4D3F4BF358DB4ED25F1B0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		895FC1AF4807A8F4259F2C6B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				912742EDAF67C98D5FFCAC76 /* Assets.xcassets in Resources */,
+				401EA474FE2D5C7AF1567E64 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5AFD964D32B10704E99FA3A5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				180F6C8F3FEDC6EE964A6C2F /* BuddyClawCLIEntry.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		835D7E921F361BC580C2413C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9B9D4036693C626F5F0817FB /* CompanionGeneratorTests.swift in Sources */,
+				9CC8D269BE797D26EDA9FDF6 /* CompanionIdentityServiceTests.swift in Sources */,
+				A3ADCAA14A8B699A1E10326D /* DesktopBuddySettingsTests.swift in Sources */,
+				97725F786BA9B377F44A2986 /* VaultStoreTests.swift in Sources */,
+				8B588322214448EB5364B320 /* VerifiedSpriteCatalogTests.swift in Sources */,
+				E17FCA47B3CD413366E6E8D9 /* WorkStateObserverTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0816E1D3B5711009D46772D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C45628F0A20F7508F4AC8C2E /* BuddyClawCLIEntry.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		088A7AF7D4775794D70F4FEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alfred.buddyclaw.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "";
+			};
+			name = Release;
+		};
+		2331FB252610BEF46B889E8D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		4705E65A095E39398C53C223 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FB942966ECE781A1A619D94 /* BuddyClawDirect.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_NAME = BuddyClaw;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Release;
+		};
+		590214F2803E8D64F6A8368D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FB942966ECE781A1A619D94 /* BuddyClawDirect.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_NAME = BuddyClaw;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
+		9579904542D0535BCD6BF976 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 721367EDD55B00D1CD825005 /* BuddyClawAppStore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_NAME = BuddyClaw;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Release;
+		};
+		AB953650587AC7358785438C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		E2CB4C0D0D9EB7B3DA73C0F0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 721367EDD55B00D1CD825005 /* BuddyClawAppStore.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_NAME = BuddyClaw;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+			};
+			name = Debug;
+		};
+		F44148C58463EE5900EC7E75 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "";
+				CODE_SIGNING_ALLOWED = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				ENABLE_TESTABILITY = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @loader_path/Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alfred.buddyclaw.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = macosx;
+				SWIFT_VERSION = 5.9;
+				TEST_HOST = "";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		127C56624E68154E1DCB6791 /* Build configuration list for PBXNativeTarget "BuddyClawDirect" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				590214F2803E8D64F6A8368D /* Debug */,
+				4705E65A095E39398C53C223 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		605F3FFE51887C910DB91AC3 /* Build configuration list for PBXNativeTarget "BuddyClawAppStore" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E2CB4C0D0D9EB7B3DA73C0F0 /* Debug */,
+				9579904542D0535BCD6BF976 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		60FE7C5E924B0CDE9F4CA538 /* Build configuration list for PBXNativeTarget "DesktopBuddyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F44148C58463EE5900EC7E75 /* Debug */,
+				088A7AF7D4775794D70F4FEE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B90D05394D4D12FF096F3625 /* Build configuration list for PBXProject "BuddyClaw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AB953650587AC7358785438C /* Debug */,
+				2331FB252610BEF46B889E8D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		CBB5E8DCD126F16B43C7E3E5 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = .;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		29130DC102C990C16AEFA5BE /* DesktopBuddy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBB5E8DCD126F16B43C7E3E5 /* XCLocalSwiftPackageReference "." */;
+			productName = DesktopBuddy;
+		};
+		3F861BC179D3553565826C59 /* DesktopBuddy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBB5E8DCD126F16B43C7E3E5 /* XCLocalSwiftPackageReference "." */;
+			productName = DesktopBuddy;
+		};
+		5FB30672F3E175CC2C6DACEA /* DesktopBuddy */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CBB5E8DCD126F16B43C7E3E5 /* XCLocalSwiftPackageReference "." */;
+			productName = DesktopBuddy;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5A51C1DECB0FC9945132B584 /* Project object */;
+}

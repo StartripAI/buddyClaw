@@ -4,6 +4,18 @@ import Foundation
 
 @MainActor
 public final class WorkStateObserver: ObservableObject {
+    public struct MonitoringCapabilities: OptionSet, Sendable {
+        public let rawValue: Int
+
+        public init(rawValue: Int) {
+            self.rawValue = rawValue
+        }
+
+        public static let frontmostApp = MonitoringCapabilities(rawValue: 1 << 0)
+        public static let globalInput = MonitoringCapabilities(rawValue: 1 << 1)
+        public static let all: MonitoringCapabilities = [.frontmostApp, .globalInput]
+    }
+
     @Published public private(set) var snapshot = WorkSnapshot()
 
     public var snapshotHandler: (@MainActor (WorkSnapshot) -> Void)?
@@ -20,8 +32,13 @@ public final class WorkStateObserver: ObservableObject {
     private var codingSessionStartAt: Date?
     private var pendingBuildFailure = false
     private var lastBuildCheckAt: Date = .distantPast
+    public private(set) var activeCapabilities: MonitoringCapabilities = []
 
     public init() {}
+
+    public var isMonitoringActive: Bool {
+        sampleTimer != nil && activeCapabilities.isEmpty == false
+    }
 
     deinit {
         sampleTimer?.invalidate()
@@ -35,35 +52,45 @@ public final class WorkStateObserver: ObservableObject {
         buildCheckWorkItem?.cancel()
     }
 
-    public func start() {
-        guard sampleTimer == nil else { return }
+    public func start(capabilities: MonitoringCapabilities = .all) {
+        if sampleTimer != nil && activeCapabilities == capabilities {
+            return
+        }
 
-        activateObserver = NSWorkspace.shared.notificationCenter.addObserver(
-            forName: NSWorkspace.didActivateApplicationNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] notification in
-            MainActor.assumeIsolated {
-                self?.handleActivatedApplication(notification)
+        stop()
+        activeCapabilities = capabilities
+        guard capabilities.isEmpty == false else { return }
+
+        if capabilities.contains(.frontmostApp) {
+            activateObserver = NSWorkspace.shared.notificationCenter.addObserver(
+                forName: NSWorkspace.didActivateApplicationNotification,
+                object: nil,
+                queue: .main
+            ) { [weak self] notification in
+                MainActor.assumeIsolated {
+                    self?.handleActivatedApplication(notification)
+                }
             }
         }
 
-        let masks: [NSEvent.EventTypeMask] = [
-            .keyDown,
-            .flagsChanged,
-            .leftMouseDown,
-            .rightMouseDown,
-            .mouseMoved,
-            .scrollWheel,
-        ]
+        if capabilities.contains(.globalInput) {
+            let masks: [NSEvent.EventTypeMask] = [
+                .keyDown,
+                .flagsChanged,
+                .leftMouseDown,
+                .rightMouseDown,
+                .mouseMoved,
+                .scrollWheel,
+            ]
 
-        for mask in masks {
-            if let token = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: { [weak self] _ in
-                MainActor.assumeIsolated {
-                    self?.markActivity(isKeyEvent: mask == .keyDown || mask == .flagsChanged)
+            for mask in masks {
+                if let token = NSEvent.addGlobalMonitorForEvents(matching: mask, handler: { [weak self] _ in
+                    MainActor.assumeIsolated {
+                        self?.markActivity(isKeyEvent: mask == .keyDown || mask == .flagsChanged)
+                    }
+                }) {
+                    globalMonitorTokens.append(token)
                 }
-            }) {
-                globalMonitorTokens.append(token)
             }
         }
 
@@ -91,6 +118,9 @@ public final class WorkStateObserver: ObservableObject {
 
         buildCheckWorkItem?.cancel()
         buildCheckWorkItem = nil
+        pendingBuildFailure = false
+        snapshot = WorkSnapshot()
+        activeCapabilities = []
     }
 
     private func markActivity(isKeyEvent: Bool) {

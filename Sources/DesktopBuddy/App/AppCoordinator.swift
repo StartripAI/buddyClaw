@@ -6,6 +6,7 @@ import UniformTypeIdentifiers
 
 @MainActor
 public final class AppCoordinator: NSObject {
+    private let distributionChannel = DistributionChannel.current
     private let storage = StorageManager()
     private let generator = CompanionGenerator()
     private let dialogueBank = DialogueBank.shared
@@ -48,8 +49,7 @@ public final class AppCoordinator: NSObject {
         let settings = normalizedSettings(loadedSettings, species: identity.profile.species)
         let growthState = storage.loadGrowthState()
 
-        if settings.preferredArtStyle != loadedSettings.preferredArtStyle
-            || settings.petScalePercent != loadedSettings.petScalePercent {
+        if settings != loadedSettings {
             storage.saveSettings(settings)
         }
 
@@ -81,6 +81,7 @@ public final class AppCoordinator: NSObject {
         setupPersistenceBindings(appState: appState)
 
         windowManager?.start()
+        presentActivityMonitoringOnboardingIfNeeded()
 
         if !settings.isMuted {
             speechBubbleManager.show(
@@ -135,6 +136,8 @@ public final class AppCoordinator: NSObject {
                 )
             },
             settingsProvider: { [weak appState] in appState?.settings ?? .default },
+            distributionChannelProvider: { [weak self] in self?.distributionChannel ?? .direct },
+            activityMonitoringActiveProvider: { [weak appState] in appState?.isActivityMonitoringActive ?? false },
             spriteCatalog: spriteCatalog
         )
 
@@ -148,6 +151,7 @@ public final class AppCoordinator: NSObject {
         menuBarManager.onResetCompanion = { [weak self] in self?.resetCompanionImmediately() }
         menuBarManager.onOpenSettings = { [weak self] in self?.openSettings() }
         menuBarManager.onToggleMute = { [weak self] newValue in self?.setMuted(newValue) }
+        menuBarManager.onToggleActivityMonitoring = { [weak self] newValue in self?.setActivityMonitoringEnabled(newValue) }
         menuBarManager.onQuit = { NSApp.terminate(nil) }
 
         self.menuBarManager = menuBarManager
@@ -220,7 +224,7 @@ public final class AppCoordinator: NSObject {
                 }
             }
         }
-        workStateObserver.start()
+        refreshActivityMonitoring(resetSnapshot: true)
     }
 
     private func setupPersistenceBindings(appState: AppStateStore) {
@@ -232,6 +236,7 @@ public final class AppCoordinator: NSObject {
                 self.speechBubbleManager.setDefaultDisplayDuration(settings.speechBubbleSeconds)
                 self.spriteAnimator?.updateScale(settings.petScale)
                 self.spriteAnimator?.updateCompanion(appState.companion, artStyle: settings.preferredArtStyle)
+                self.refreshActivityMonitoring(resetSnapshot: settings.activityMonitoringEnabled == false)
                 self.windowManager?.refreshContent()
                 self.menuBarManager?.refresh()
 
@@ -419,6 +424,8 @@ public final class AppCoordinator: NSObject {
             initialSettings: appState.settings,
             initialProfile: appState.companionProfile,
             initialCompanion: appState.companion,
+            distributionChannel: distributionChannel,
+            isActivityMonitoringActive: appState.isActivityMonitoringActive,
             availableSpecies: companionIdentity.availableSpecies,
             availableStyles: spriteCatalog.availableStyles,
             styleAvailability: { [weak self] style, species in
@@ -553,7 +560,10 @@ public final class AppCoordinator: NSObject {
     private func commitSettings(settings: DesktopBuddySettings) {
         guard let appState else { return }
         let activeSpecies = previewCompanionProfile?.species ?? appState.companionProfile.species
-        let normalized = normalizedSettings(settings, species: activeSpecies)
+        let normalized = normalizedSettings(
+            resolveActivityMonitoringRequest(proposed: settings, existing: appState.settings),
+            species: activeSpecies
+        )
 
         appState.settings = normalized
         storage.saveSettings(normalized)
@@ -678,6 +688,13 @@ public final class AppCoordinator: NSObject {
         }
     }
 
+    private func setActivityMonitoringEnabled(_ isEnabled: Bool) {
+        guard let appState else { return }
+        var proposed = appState.settings
+        proposed.activityMonitoringEnabled = isEnabled
+        appState.settings = resolveActivityMonitoringRequest(proposed: proposed, existing: appState.settings)
+    }
+
     private func resetCompanionImmediately() {
         guard let appState else { return }
         let profile = companionIdentity.resetProfile(settings: appState.settings)
@@ -721,6 +738,83 @@ public final class AppCoordinator: NSObject {
             species: species
         )
         return normalized
+    }
+
+    private func resolveActivityMonitoringRequest(
+        proposed: DesktopBuddySettings,
+        existing: DesktopBuddySettings
+    ) -> DesktopBuddySettings {
+        var resolved = proposed
+        guard proposed.activityMonitoringEnabled != existing.activityMonitoringEnabled else {
+            return resolved
+        }
+
+        if proposed.activityMonitoringEnabled {
+            let consentGranted = requestActivityMonitoringConsentIfNeeded()
+            resolved.activityMonitoringEnabled = consentGranted
+            resolved.hasSeenPrivacyOnboarding = true
+            resolved.activityMonitoringConsentState = consentGranted ? .granted : .declined
+        } else if distributionChannel.requiresExplicitActivityConsent {
+            resolved.activityMonitoringConsentState = .declined
+            resolved.hasSeenPrivacyOnboarding = true
+        }
+
+        return resolved
+    }
+
+    private func refreshActivityMonitoring(resetSnapshot: Bool) {
+        guard let appState else { return }
+        let capabilities = ActivityMonitoringPolicy.observationCapabilities(
+            settings: appState.settings,
+            channel: distributionChannel
+        )
+
+        if capabilities.isEmpty {
+            workStateObserver.stop()
+            if resetSnapshot {
+                lastRecordedSnapshot = nil
+                appState.latestWorkSnapshot = nil
+            }
+        } else {
+            workStateObserver.start(capabilities: capabilities)
+        }
+
+        appState.isActivityMonitoringActive = workStateObserver.isMonitoringActive
+        menuBarManager?.refresh()
+    }
+
+    private func presentActivityMonitoringOnboardingIfNeeded() {
+        guard distributionChannel == .appStore, let appState else { return }
+        guard appState.settings.hasSeenPrivacyOnboarding == false else { return }
+
+        let consentGranted = requestActivityMonitoringConsentIfNeeded()
+        appState.settings.activityMonitoringEnabled = consentGranted
+        appState.settings.hasSeenPrivacyOnboarding = true
+        appState.settings.activityMonitoringConsentState = consentGranted ? .granted : .declined
+    }
+
+    private func requestActivityMonitoringConsentIfNeeded() -> Bool {
+        guard appState != nil else { return false }
+        guard distributionChannel.requiresExplicitActivityConsent else { return true }
+        guard appState?.settings.activityMonitoringConsentState != .granted else {
+            return true
+        }
+
+        let alert = NSAlert()
+        alert.alertStyle = .informational
+        alert.messageText = L10n.text(
+            "是否启用活动记录？",
+            "Enable activity capture?"
+        )
+        alert.informativeText = L10n.text(
+            "BuddyClaw 只会在你显式开启后，才在本机记录前台应用切换、活跃节奏，以及在获得辅助功能授权后的全局键盘和鼠标活动。",
+            "BuddyClaw only records frontmost-app switches, activity rhythm, and global keyboard or mouse activity on this Mac after you explicitly enable it and grant Accessibility when needed."
+        )
+        alert.addButton(withTitle: L10n.text("稍后再说", "Not Now"))
+        alert.addButton(withTitle: L10n.text("启用活动记录", "Enable Activity Capture"))
+        NSApp.activate(ignoringOtherApps: true)
+
+        return alert.runModal() == .alertSecondButtonReturn
     }
 
     private func refreshVaultState() async {

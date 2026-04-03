@@ -9,6 +9,8 @@ public struct SettingsView: View {
     @State private var didCommit = false
     @State private var suppressAutomaticPreview = false
 
+    private let distributionChannel: DistributionChannel
+    private let isActivityMonitoringActive: Bool
     private let availableSpecies: [Species]
     private let availableStyles: [ArtStyle]
     private let styleAvailability: @MainActor (ArtStyle, Species) -> Bool
@@ -21,6 +23,8 @@ public struct SettingsView: View {
         initialSettings: DesktopBuddySettings,
         initialProfile: StoredCompanionProfile,
         initialCompanion: Companion,
+        distributionChannel: DistributionChannel,
+        isActivityMonitoringActive: Bool,
         availableSpecies: [Species],
         availableStyles: [ArtStyle],
         styleAvailability: @escaping @MainActor (ArtStyle, Species) -> Bool,
@@ -32,6 +36,8 @@ public struct SettingsView: View {
         _settings = State(initialValue: initialSettings)
         _selectedSpecies = State(initialValue: initialProfile.species)
         _previewCompanion = State(initialValue: initialCompanion)
+        self.distributionChannel = distributionChannel
+        self.isActivityMonitoringActive = isActivityMonitoringActive
         self.availableSpecies = availableSpecies
         self.availableStyles = availableStyles
         self.styleAvailability = styleAvailability
@@ -118,6 +124,12 @@ public struct SettingsView: View {
                     Toggle(L10n.text("启用主动评论", "Enable proactive comments"), isOn: $settings.proactiveCommentsEnabled)
                     Toggle(L10n.text("允许在桌面移动", "Allow desktop movement"), isOn: $settings.movementEnabled)
                     Toggle(L10n.text("记录本地记忆", "Capture local memory"), isOn: $settings.memoryCaptureEnabled)
+                    Toggle(
+                        distributionChannel == .appStore
+                            ? L10n.text("启用活动记录（需显式同意）", "Enable activity capture (opt-in)")
+                            : L10n.text("启用活动记录", "Enable activity capture"),
+                        isOn: $settings.activityMonitoringEnabled
+                    )
                     Toggle(L10n.text("启用 Starter Pack", "Enable starter pack"), isOn: $settings.starterPackEnabled)
 
                     HStack {
@@ -170,9 +182,31 @@ public struct SettingsView: View {
 
                 Section(L10n.text("权限提示", "Permissions")) {
                     Text(
+                        distributionChannel == .appStore
+                            ? L10n.text(
+                                isActivityMonitoringActive
+                                    ? "当前状态：活动记录已开启，BuddyClaw 会把前台应用和活跃节奏保存在本机。关闭开关后会立即停止新的活动采样。"
+                                    : "当前状态：活动记录默认关闭。只有在你显式开启后，BuddyClaw 才会记录前台应用和活跃节奏，而且数据仍然只保存在本机。",
+                                isActivityMonitoringActive
+                                    ? "Current status: activity capture is on. BuddyClaw keeps frontmost-app and activity rhythm data on this Mac only. Turning the toggle off stops new sampling immediately."
+                                    : "Current status: activity capture is off by default. BuddyClaw only records frontmost-app and activity rhythm data after you explicitly enable it, and the data stays on this Mac."
+                            )
+                            : L10n.text(
+                                "Direct 版默认保留本地活动记录体验；如果你关闭它，BuddyClaw 会立刻停止新的活动采样。",
+                                "The direct-distribution build keeps local activity capture enabled by default; if you turn it off, BuddyClaw stops new sampling immediately."
+                            )
+                    )
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+
+                    Text(
                         L10n.text(
-                            "若要统计全局键盘活跃度，请在“系统设置 > 隐私与安全性 > 辅助功能”中授权 DesktopBuddy。",
-                            "To observe global keyboard activity, allow DesktopBuddy under System Settings > Privacy & Security > Accessibility."
+                            distributionChannel == .appStore
+                                ? "若要记录全局键盘与鼠标活跃度，请在你开启活动记录后，再到“系统设置 > 隐私与安全性 > 辅助功能”中授权 BuddyClaw。"
+                                : "若要统计全局键盘与鼠标活跃度，请在“系统设置 > 隐私与安全性 > 辅助功能”中授权 BuddyClaw。",
+                            distributionChannel == .appStore
+                                ? "To observe global keyboard and mouse activity, enable activity capture first, then allow BuddyClaw under System Settings > Privacy & Security > Accessibility."
+                                : "To observe global keyboard and mouse activity, allow BuddyClaw under System Settings > Privacy & Security > Accessibility."
                         )
                     )
                     .font(.footnote)

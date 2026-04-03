@@ -560,7 +560,7 @@ public struct WorkSnapshot: Codable, Sendable {
 
 // MARK: - App settings / 应用设置
 
-public struct DesktopBuddySettings: Codable, Sendable {
+public struct DesktopBuddySettings: Codable, Sendable, Equatable {
     public var model: String
     public var isMuted: Bool
     public var preferredArtStyle: ArtStyle
@@ -573,11 +573,15 @@ public struct DesktopBuddySettings: Codable, Sendable {
     public var movementEnabled: Bool
     public var openSettingsOnLaunch: Bool
     public var memoryCaptureEnabled: Bool
+    public var activityMonitoringEnabled: Bool
+    public var activityMonitoringConsentState: ActivityMonitoringConsentState
+    public var hasSeenPrivacyOnboarding: Bool
     public var rawEventRetentionDays: Int
     public var starterPackEnabled: Bool
     public var defaultAskScope: AskScope
 
     public init(
+        channel: DistributionChannel = .current,
         model: String = "local-extractive-v1",
         isMuted: Bool = false,
         preferredArtStyle: ArtStyle = .pixel,
@@ -590,10 +594,14 @@ public struct DesktopBuddySettings: Codable, Sendable {
         movementEnabled: Bool = true,
         openSettingsOnLaunch: Bool = false,
         memoryCaptureEnabled: Bool = true,
+        activityMonitoringEnabled: Bool? = nil,
+        activityMonitoringConsentState: ActivityMonitoringConsentState? = nil,
+        hasSeenPrivacyOnboarding: Bool? = nil,
         rawEventRetentionDays: Int = 90,
         starterPackEnabled: Bool = true,
         defaultAskScope: AskScope = .all
     ) {
+        let monitoringDefaults = ActivityMonitoringPolicy.defaults(for: channel)
         self.model = model
         self.isMuted = isMuted
         self.preferredArtStyle = preferredArtStyle
@@ -606,6 +614,9 @@ public struct DesktopBuddySettings: Codable, Sendable {
         self.movementEnabled = movementEnabled
         self.openSettingsOnLaunch = openSettingsOnLaunch
         self.memoryCaptureEnabled = memoryCaptureEnabled
+        self.activityMonitoringEnabled = activityMonitoringEnabled ?? monitoringDefaults.enabled
+        self.activityMonitoringConsentState = activityMonitoringConsentState ?? monitoringDefaults.consentState
+        self.hasSeenPrivacyOnboarding = hasSeenPrivacyOnboarding ?? monitoringDefaults.hasSeenOnboarding
         self.rawEventRetentionDays = rawEventRetentionDays
         self.starterPackEnabled = starterPackEnabled
         self.defaultAskScope = defaultAskScope
@@ -626,6 +637,9 @@ public struct DesktopBuddySettings: Codable, Sendable {
         case movementEnabled
         case openSettingsOnLaunch
         case memoryCaptureEnabled
+        case activityMonitoringEnabled
+        case activityMonitoringConsentState
+        case hasSeenPrivacyOnboarding
         case rawEventRetentionDays
         case starterPackEnabled
         case defaultAskScope
@@ -633,6 +647,7 @@ public struct DesktopBuddySettings: Codable, Sendable {
 
     public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        let monitoringDefaults = ActivityMonitoringPolicy.defaults(for: .current)
         self.model = try container.decodeIfPresent(String.self, forKey: .model) ?? "local-extractive-v1"
         self.isMuted = try container.decodeIfPresent(Bool.self, forKey: .isMuted) ?? false
         let preferredStyle = try container.decodeIfPresent(ArtStyle.self, forKey: .preferredArtStyle)
@@ -653,6 +668,12 @@ public struct DesktopBuddySettings: Codable, Sendable {
         self.movementEnabled = try container.decodeIfPresent(Bool.self, forKey: .movementEnabled) ?? true
         self.openSettingsOnLaunch = try container.decodeIfPresent(Bool.self, forKey: .openSettingsOnLaunch) ?? false
         self.memoryCaptureEnabled = try container.decodeIfPresent(Bool.self, forKey: .memoryCaptureEnabled) ?? true
+        self.activityMonitoringEnabled = try container.decodeIfPresent(Bool.self, forKey: .activityMonitoringEnabled) ?? monitoringDefaults.enabled
+        self.activityMonitoringConsentState = try container.decodeIfPresent(
+            ActivityMonitoringConsentState.self,
+            forKey: .activityMonitoringConsentState
+        ) ?? monitoringDefaults.consentState
+        self.hasSeenPrivacyOnboarding = try container.decodeIfPresent(Bool.self, forKey: .hasSeenPrivacyOnboarding) ?? monitoringDefaults.hasSeenOnboarding
         self.rawEventRetentionDays = try container.decodeIfPresent(Int.self, forKey: .rawEventRetentionDays) ?? 90
         self.starterPackEnabled = try container.decodeIfPresent(Bool.self, forKey: .starterPackEnabled) ?? true
         self.defaultAskScope = try container.decodeIfPresent(AskScope.self, forKey: .defaultAskScope) ?? .all
@@ -672,6 +693,9 @@ public struct DesktopBuddySettings: Codable, Sendable {
         try container.encode(movementEnabled, forKey: .movementEnabled)
         try container.encode(openSettingsOnLaunch, forKey: .openSettingsOnLaunch)
         try container.encode(memoryCaptureEnabled, forKey: .memoryCaptureEnabled)
+        try container.encode(activityMonitoringEnabled, forKey: .activityMonitoringEnabled)
+        try container.encode(activityMonitoringConsentState, forKey: .activityMonitoringConsentState)
+        try container.encode(hasSeenPrivacyOnboarding, forKey: .hasSeenPrivacyOnboarding)
         try container.encode(rawEventRetentionDays, forKey: .rawEventRetentionDays)
         try container.encode(starterPackEnabled, forKey: .starterPackEnabled)
         try container.encode(defaultAskScope, forKey: .defaultAskScope)
@@ -686,5 +710,7 @@ public extension DesktopBuddySettings {
 }
 
 public extension DesktopBuddySettings {
-    static let `default` = DesktopBuddySettings()
+    static var `default`: DesktopBuddySettings {
+        DesktopBuddySettings(channel: .current)
+    }
 }

@@ -1,0 +1,6 @@
+#include "Common.xcconfig"
+
+PRODUCT_BUNDLE_IDENTIFIER = com.alfred.buddyclaw.direct
+BUDDYCLAW_DISTRIBUTION_CHANNEL = direct
+SWIFT_ACTIVE_COMPILATION_CONDITIONS = $(inherited) DIRECT_DISTRIBUTION
+INFOPLIST_FILE = Support/BuddyClaw-Info.plist

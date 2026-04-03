@@ -13,20 +13,27 @@ public final class MenuBarManager: NSObject {
     public var onResetCompanion: (() -> Void)?
     public var onOpenSettings: (() -> Void)?
     public var onToggleMute: ((Bool) -> Void)?
+    public var onToggleActivityMonitoring: ((Bool) -> Void)?
     public var onQuit: (() -> Void)?
 
     private let companionProvider: () -> Companion
     private let settingsProvider: () -> DesktopBuddySettings
+    private let distributionChannelProvider: () -> DistributionChannel
+    private let activityMonitoringActiveProvider: () -> Bool
     private let spriteCatalog: VerifiedSpriteCatalog
     private let statusItem: NSStatusItem
 
     public init(
         companionProvider: @escaping () -> Companion,
         settingsProvider: @escaping () -> DesktopBuddySettings,
+        distributionChannelProvider: @escaping () -> DistributionChannel = { .current },
+        activityMonitoringActiveProvider: @escaping () -> Bool = { false },
         spriteCatalog: VerifiedSpriteCatalog = VerifiedSpriteCatalog()
     ) {
         self.companionProvider = companionProvider
         self.settingsProvider = settingsProvider
+        self.distributionChannelProvider = distributionChannelProvider
+        self.activityMonitoringActiveProvider = activityMonitoringActiveProvider
         self.spriteCatalog = spriteCatalog
         self.statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         super.init()
@@ -35,7 +42,7 @@ public final class MenuBarManager: NSObject {
 
     public func refresh() {
         let companion = companionProvider()
-        statusItem.button?.title = "\(companion.species.emoji) \(companion.name)"
+        statusItem.button?.title = statusTitle(for: companion)
         rebuildMenu()
     }
 
@@ -43,8 +50,9 @@ public final class MenuBarManager: NSObject {
         let companion = companionProvider()
         let settings = settingsProvider()
         let currentStyle = settings.preferredArtStyle
+        let channel = distributionChannelProvider()
 
-        statusItem.button?.title = "\(companion.species.emoji) \(companion.name)"
+        statusItem.button?.title = statusTitle(for: companion)
 
         let menu = NSMenu()
 
@@ -81,6 +89,14 @@ public final class MenuBarManager: NSObject {
         let importItem = NSMenuItem(title: L10n.text("导入资料…", "Import Content…"), action: #selector(importContent), keyEquivalent: "i")
         importItem.target = self
         menu.addItem(importItem)
+
+        let activityTitle = channel == .appStore
+            ? L10n.text("活动记录（需显式开启）", "Activity Capture (Opt-in)")
+            : L10n.text("活动记录", "Activity Capture")
+        let activityItem = NSMenuItem(title: activityTitle, action: #selector(toggleActivityMonitoring), keyEquivalent: "")
+        activityItem.target = self
+        activityItem.state = settings.activityMonitoringEnabled ? .on : .off
+        menu.addItem(activityItem)
 
         let settingsItem = NSMenuItem(title: L10n.text("设置…", "Settings…"), action: #selector(openSettings), keyEquivalent: ",")
         settingsItem.target = self
@@ -136,6 +152,11 @@ public final class MenuBarManager: NSObject {
         return menu
     }
 
+    private func statusTitle(for companion: Companion) -> String {
+        let prefix = activityMonitoringActiveProvider() ? "● " : ""
+        return "\(prefix)\(companion.species.emoji) \(companion.name)"
+    }
+
     @objc private func selectSpecies(_ sender: NSMenuItem) {
         guard let rawValue = sender.representedObject as? String,
               let species = Species(rawValue: rawValue) else { return }
@@ -163,6 +184,12 @@ public final class MenuBarManager: NSObject {
     @objc private func toggleMute() {
         let newValue = !settingsProvider().isMuted
         onToggleMute?(newValue)
+        refresh()
+    }
+
+    @objc private func toggleActivityMonitoring() {
+        let newValue = !settingsProvider().activityMonitoringEnabled
+        onToggleActivityMonitoring?(newValue)
         refresh()
     }
 

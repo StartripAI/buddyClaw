@@ -32,7 +32,7 @@ Local-first bilingual macOS desktop pet with Pixel, ASCII, and Claw styles, menu
 
 - `Pixel` style is the formal production look.
 - `ASCII` style is built in and always available.
-- `Claw` style is fully wired in the product architecture and UI; it becomes selectable the moment its dedicated sprite pack lands.
+- `Claw` style now ships as a bundled selectable style alongside `Pixel` and `ASCII`.
 - `Memory Center` lets you import local content, write manual notes, ask offline questions, and review the local timeline.
 - System-following bilingual UI: Chinese on Chinese systems, English on English systems.
 
@@ -72,7 +72,7 @@ Answers are extractive and source-backed. If the app cannot find enough support 
 
 - `Pixel`: crisp sprite-sheet production assets
 - `ASCII`: code-rendered fallback with real product entry points restored
-- `Claw`: dedicated style lane reserved for a warm orange/yellow mascot aesthetic that quietly tips its hat to a beloved terminal-era vibe without becoming derivative
+- `Claw`: bundled warm amber mascot art with the same first-class menu and settings entry points as the other styles
 
 ## Download
 
@@ -81,6 +81,12 @@ The fastest path is the direct DMG stored in the repository, with GitHub Release
 - Download [BuddyClaw.dmg](https://github.com/StartripAI/buddyClaw/raw/main/downloads/BuddyClaw.dmg)
 - Or open [Releases](https://github.com/StartripAI/buddyClaw/releases)
 - Drag `BuddyClaw.app` into `Applications`
+
+### Distribution Channels
+
+- `Direct DMG`: keeps the original local-first desktop experience, with activity capture enabled by default and fully stored on-device.
+- `Mac App Store`: ships through a sandboxed Xcode archive/export flow, with activity capture off by default until you explicitly enable it.
+- Both channels ship the same bundled `Pixel`, `ASCII`, and `Claw` styles.
 
 ## Build From Source
 
@@ -95,6 +101,14 @@ The fastest path is the direct DMG stored in the repository, with GitHub Release
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun swift build
 ```
 
+### Build The Xcode Hosts
+
+```bash
+ruby ./scripts/generate_xcodeproj.rb
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project BuddyClaw.xcodeproj -scheme BuddyClawDirect -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project BuddyClaw.xcodeproj -scheme BuddyClawAppStore -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build
+```
+
 ### Test
 
 ```bash
@@ -107,12 +121,22 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun swift test
 ./scripts/release_buddyclaw.sh --codesign-identity - --output-dir ./dist/local --skip-notarize
 ```
 
+### App Store Archive
+
+```bash
+./scripts/archive_app_store.sh --skip-export --output-dir ./dist/app-store-local
+./scripts/archive_app_store.sh --team-id YOURTEAMID --output-dir ./dist/app-store
+```
+
+The signed App Store path expects your Apple Developer account to be actively signed in inside Xcode so `xcodebuild` can fetch signing assets.
+
 ## Product Notes
 
 - BuddyClaw is a menu-bar accessory app, so it does not show in the Dock by default.
 - The app validates production pixel sprites before release.
 - Release bundles keep runtime assets only and strip authoring docs/scripts from the shipped app.
-- `ClawSprites` can be added later without changing the product architecture again.
+- The bundled release now includes `PixelSprites` and `ClawSprites`, with `ASCII` always available as the code-rendered fallback.
+- The repository now includes a generated `BuddyClaw.xcodeproj` host with `BuddyClawDirect` and `BuddyClawAppStore` schemes on top of the shared Swift package.
 
 ---
 
@@ -147,7 +171,7 @@ BuddyClaw 是一只本地优先的 macOS 桌宠：
   代码渲染版本已经恢复为正式可选入口，不再是隐藏 fallback
 
 - `Claw`
-  风格通路、菜单和设置入口都已经就位；等专属素材包放入后即可直接启用
+  现在已经随应用一起打包，和 `Pixel`、`ASCII` 一样可以直接切换使用
 
 ## 记忆中心能做什么
 
@@ -167,12 +191,26 @@ BuddyClaw 会明确告诉你回答是否来自本地命中，而不会假装自�
 - 或进入 [Releases](https://github.com/StartripAI/buddyClaw/releases)
 - 将 `BuddyClaw.app` 拖入 `Applications`
 
+### 分发渠道
+
+- `Direct DMG`：保留原本的本地优先桌宠体验，活动记录默认开启，但数据始终只保存在本机。
+- `Mac App Store`：通过 sandbox + Xcode archive/export 链路发布，活动记录默认关闭，只有你显式开启后才会开始采样。
+- 两个渠道都自带 `Pixel`、`ASCII`、`Claw` 三种风格。
+
 ## 从源码运行
 
 构建：
 
 ```bash
 DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun swift build
+```
+
+Xcode 宿主工程：
+
+```bash
+ruby ./scripts/generate_xcodeproj.rb
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project BuddyClaw.xcodeproj -scheme BuddyClawDirect -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build
+DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcodebuild -project BuddyClaw.xcodeproj -scheme BuddyClawAppStore -destination 'generic/platform=macOS' CODE_SIGNING_ALLOWED=NO build
 ```
 
 测试：
@@ -186,6 +224,15 @@ DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer xcrun swift test
 ```bash
 ./scripts/release_buddyclaw.sh --codesign-identity - --output-dir ./dist/local --skip-notarize
 ```
+
+App Store 归档：
+
+```bash
+./scripts/archive_app_store.sh --skip-export --output-dir ./dist/app-store-local
+./scripts/archive_app_store.sh --team-id YOURTEAMID --output-dir ./dist/app-store
+```
+
+要走带签名的 App Store 导出流程，需要先确保你的 Apple Developer 账号已经在 Xcode 内处于登录有效状态，这样 `xcodebuild` 才能自动拉取签名资产。
 
 ## 一个小小的气质说明
 

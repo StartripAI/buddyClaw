@@ -5,9 +5,9 @@
     <key>CFBundleDisplayName</key>
     <string>BuddyClaw</string>
     <key>CFBundleExecutable</key>
-    <string>BuddyClaw</string>
+    <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
-    <string>com.alfred.buddyclaw.direct</string>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -15,23 +15,20 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>0.1.0</string>
+    <string>$(MARKETING_VERSION)</string>
     <key>CFBundleVersion</key>
-    <string>1</string>
+    <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <false/>
     <key>LSApplicationCategoryType</key>
     <string>public.app-category.utilities</string>
-
     <key>LSUIElement</key>
     <true/>
-
     <key>NSSupportsAutomaticGraphicsSwitching</key>
     <true/>
-
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>BuddyClawDistributionChannel</key>
-    <string>direct</string>
+    <string>$(BUDDYCLAW_DISTRIBUTION_CHANNEL)</string>
 </dict>
 </plist>

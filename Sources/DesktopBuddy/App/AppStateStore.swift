@@ -10,6 +10,7 @@ public final class AppStateStore: ObservableObject {
     @Published public var companion: Companion
     @Published public var growthState: GrowthState
     @Published public var latestWorkSnapshot: WorkSnapshot?
+    @Published public var isActivityMonitoringActive: Bool
     @Published public var libraryStats: LibraryStats
     @Published public var recentMemoryDigest: MemoryDigest?
     @Published public var lastAskResult: AskResult?
@@ -19,6 +20,7 @@ public final class AppStateStore: ObservableObject {
         companionProfile: StoredCompanionProfile,
         companion: Companion,
         growthState: GrowthState,
+        isActivityMonitoringActive: Bool = false,
         libraryStats: LibraryStats = LibraryStats(),
         recentMemoryDigest: MemoryDigest? = nil,
         lastAskResult: AskResult? = nil
@@ -28,6 +30,7 @@ public final class AppStateStore: ObservableObject {
         self.companion = companion
         self.growthState = growthState
         self.latestWorkSnapshot = nil
+        self.isActivityMonitoringActive = isActivityMonitoringActive
         self.libraryStats = libraryStats
         self.recentMemoryDigest = recentMemoryDigest
         self.lastAskResult = lastAskResult

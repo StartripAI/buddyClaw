@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=1024, initial-scale=1">
+  <title>BuddyClaw App Icon</title>
+  <style>
+    html, body {
+      margin: 0;
+      width: 1024px;
+      height: 1024px;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .icon {
+      position: relative;
+      width: 1024px;
+      height: 1024px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 30% 22%, rgba(255, 221, 152, 0.82), transparent 30%),
+        radial-gradient(circle at 76% 82%, rgba(101, 161, 255, 0.18), transparent 30%),
+        linear-gradient(180deg, #231b18 0%, #4b2418 42%, #c56b1d 100%);
+      border-radius: 232px;
+      box-shadow:
+        inset 0 0 0 20px rgba(255, 244, 225, 0.12),
+        inset 0 -40px 80px rgba(65, 24, 8, 0.26);
+    }
+
+    .sun {
+      position: absolute;
+      left: 50%;
+      top: 44%;
+      width: 548px;
+      height: 548px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 48%, #ffe8a5 0%, #ffcd6b 48%, #ef9b2a 78%, rgba(239, 155, 42, 0) 100%);
+      filter: blur(3px);
+      opacity: 0.98;
+    }
+
+    .ring {
+      position: absolute;
+      left: 50%;
+      top: 46%;
+      width: 640px;
+      height: 640px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      border: 10px solid rgba(255, 240, 212, 0.18);
+    }
+
+    .sprite {
+      position: absolute;
+      left: 50%;
+      top: 55%;
+      transform: translate(-50%, -50%);
+      width: 620px;
+      height: 620px;
+      background-image: url("/Sources/DesktopBuddy/Resources/ClawSprites/cat.png");
+      background-repeat: no-repeat;
+      background-size: 2480px 620px;
+      background-position: 0 0;
+      image-rendering: pixelated;
+      filter:
+        drop-shadow(0 18px 0 rgba(109, 49, 13, 0.28))
+        drop-shadow(0 32px 34px rgba(39, 16, 5, 0.32));
+    }
+
+    .spark {
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: #fff2cf;
+      box-shadow: 0 0 28px rgba(255, 232, 168, 0.7);
+      transform: rotate(45deg);
+      opacity: 0.9;
+    }
+
+    .spark.one { left: 208px; top: 208px; }
+    .spark.two { right: 222px; top: 182px; width: 18px; height: 18px; }
+    .spark.three { right: 190px; bottom: 250px; width: 22px; height: 22px; }
+  </style>
+</head>
+<body>
+  <div class="icon">
+    <div class="sun"></div>
+    <div class="ring"></div>
+    <div class="spark one"></div>
+    <div class="spark two"></div>
+    <div class="spark three"></div>
+    <div class="sprite" aria-label="BuddyClaw mascot"></div>
+  </div>
+</body>
+</html>

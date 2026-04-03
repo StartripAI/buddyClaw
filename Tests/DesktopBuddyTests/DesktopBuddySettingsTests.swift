@@ -18,6 +18,9 @@ final class DesktopBuddySettingsTests: XCTestCase {
         XCTAssertEqual(settings.petScalePercent, 50)
         XCTAssertEqual(settings.petScale, 2.0)
         XCTAssertTrue(settings.isMuted)
+        XCTAssertTrue(settings.activityMonitoringEnabled)
+        XCTAssertEqual(settings.activityMonitoringConsentState, .granted)
+        XCTAssertTrue(settings.hasSeenPrivacyOnboarding)
     }
 
     func testScalePercentBacksComputedScale() {
@@ -28,5 +31,21 @@ final class DesktopBuddySettingsTests: XCTestCase {
 
         settings.petScale = 4.0
         XCTAssertEqual(settings.petScalePercent, 100)
+    }
+
+    func testDirectChannelDefaultsKeepActivityMonitoringOn() {
+        let settings = DesktopBuddySettings(channel: .direct)
+
+        XCTAssertTrue(settings.activityMonitoringEnabled)
+        XCTAssertEqual(settings.activityMonitoringConsentState, .granted)
+        XCTAssertTrue(settings.hasSeenPrivacyOnboarding)
+    }
+
+    func testAppStoreChannelDefaultsDisableActivityMonitoring() {
+        let settings = DesktopBuddySettings(channel: .appStore)
+
+        XCTAssertFalse(settings.activityMonitoringEnabled)
+        XCTAssertEqual(settings.activityMonitoringConsentState, .notDetermined)
+        XCTAssertFalse(settings.hasSeenPrivacyOnboarding)
     }
 }

@@ -7,13 +7,17 @@ let package = Package(
         .macOS(.v14),
     ],
     products: [
+        .library(
+            name: "DesktopBuddy",
+            targets: ["DesktopBuddy"]
+        ),
         .executable(
             name: "BuddyClaw",
-            targets: ["DesktopBuddy"]
+            targets: ["BuddyClawCLI"]
         ),
     ],
     targets: [
-        .executableTarget(
+        .target(
             name: "DesktopBuddy",
             dependencies: [],
             path: "Sources/DesktopBuddy",
@@ -31,6 +35,11 @@ let package = Package(
             linkerSettings: [
                 .linkedLibrary("sqlite3"),
             ]
+        ),
+        .executableTarget(
+            name: "BuddyClawCLI",
+            dependencies: ["DesktopBuddy"],
+            path: "Sources/BuddyClawCLI"
         ),
         .testTarget(
             name: "DesktopBuddyTests",
